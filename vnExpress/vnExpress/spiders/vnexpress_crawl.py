@@ -37,7 +37,7 @@ class VnexpressCrawlSpider(scrapy.Spider):
         title = title.strip('? ')
         f = open('D:/PycharmProjects/VnExpress/tutorial/vnExpress/vnExpress/spiders/Output/' + title + '.txt', 'w+',
                  encoding='utf-8')
-        f.write('Title phuong: ' + title + '\n')
+        f.write('Title : ' + title + '\n')
 
         category = response.css('ul.breadcrumb li a::text').get()
         f.write('Category: ' + category + '\n')
