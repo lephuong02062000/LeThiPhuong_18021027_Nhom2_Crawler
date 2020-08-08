@@ -7,6 +7,7 @@
 	+ yield scrapy.Request(link_article, callback=self.get) với mỗi link bài báo  tạo một request mới tới link bài báo này, tham số callback xác định hàm sẽ thực hiện sau khi response được trả về. Ở đây là hàm get
 Trong một danh mục sẽ chia ra nhiều page vì link bài báo có số lượng lớn:
 	+ next_page = response.css('a.next-page::attr(href)').get() trả về link page tiếp theo trong cùng 1 danh mục 
+	+ next_page = response.urljoin(next_page) xây dựng một cách đầy đủ link liên kết vì có những link chỉ mang tính tương đối
 	+ yield scrapy.Request(next_page, callback=self.parse) với link page tiếp theo ta lại tạo một request tới link page tiếp theo này , và gọi lại chính hàm parse để thực hiện tương tự như link danh mục đầu tiên
 - Hàm get:
 	+ response lúc này chính là nội dung được trả về khi truy cập link ở hàm parse mà response.css('h3.title-news a::attr(href)').getall() trả về cũng chính là link dẫn đến bài báo 
@@ -27,7 +28,7 @@ Trong một danh mục sẽ chia ra nhiều page vì link bài báo có số lư
 	+ author = response.css('p.author_mail strong::text').get()
 	trả về tác giả của bài báo 
 
-	+key_words = response.css('meta[name="keywords"]::attr("content")').get() trả về những keyword của bài báo
+	+ key_words = response.css('meta[name="keywords"]::attr("content")').get() trả về những keyword của bài báo
 
 	+ tags = response.css('meta[name="its_tag"]::attr("content")').get()trả về các tag của bài báo 
 	
