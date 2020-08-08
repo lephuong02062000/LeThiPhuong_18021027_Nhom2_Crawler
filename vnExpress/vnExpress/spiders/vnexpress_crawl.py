@@ -6,6 +6,21 @@ class VnexpressCrawlSpider(scrapy.Spider):
     allowed_domains = ['vnexpress.net']
     start_urls = [
         'https://vnexpress.net/thoi-su',
+        'https://vnexpress.net/the-gioi',
+        'https://vnexpress.net/kinh-doanh',
+        'https://vnexpress.net/giai-tri',
+        'https://vnexpress.net/the-thao',
+        'https://vnexpress.net/phap-luat',
+        'https://vnexpress.net/giao-duc',
+        'https://vnexpress.net/suc-khoe',
+        'https://vnexpress.net/doi-song',
+        'https://vnexpress.net/du-lich',
+        'https://vnexpress.net/khoa-hoc',
+        'https://vnexpress.net/so-hoa',
+        'https://vnexpress.net/oto-xe-may',
+        'https://vnexpress.net/y-kien',
+        'https://vnexpress.net/tam-su',
+        'https://vnexpress.net/hai'
     ]
 
     def parse(self, response):
@@ -22,7 +37,7 @@ class VnexpressCrawlSpider(scrapy.Spider):
         title = title.strip('? ')
         f = open('D:/PycharmProjects/VnExpress/tutorial/vnExpress/vnExpress/spiders/Output/' + title + '.txt', 'w+',
                  encoding='utf-8')
-        f.write('Title: ' + title + '\n')
+        f.write('Title phuong: ' + title + '\n')
 
         category = response.css('ul.breadcrumb li a::text').get()
         f.write('Category: ' + category + '\n')
@@ -56,23 +71,7 @@ class VnexpressCrawlSpider(scrapy.Spider):
         f.write('Tags: ' + tags)
 
 
-            
-''''https://vnexpress.net/goc-nhin',
-        'https://vnexpress.net/the-gioi',
-        'https://vnexpress.net/kinh-doanh',
-        'https://vnexpress.net/giai-tri',
-        'https://vnexpress.net/the-thao',
-        'https://vnexpress.net/phap-luat',
-        'https://vnexpress.net/giao-duc',
-        'https://vnexpress.net/suc-khoe',
-        'https://vnexpress.net/doi-song',
-        'https://vnexpress.net/du-lich',
-        'https://vnexpress.net/khoa-hoc',
-        'https://vnexpress.net/so-hoa',
-        'https://vnexpress.net/oto-xe-may',
-        'https://vnexpress.net/y-kien',
-        'https://vnexpress.net/tam-su',
-        'https://vnexpress.net/hai'''
+
 
 
 
