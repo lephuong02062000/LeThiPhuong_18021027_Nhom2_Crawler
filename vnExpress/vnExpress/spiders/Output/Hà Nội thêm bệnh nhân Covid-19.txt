@@ -1,0 +1,15 @@
+Title: Hà Nội thêm bệnh nhân Covid-19
+Category: Thời sự
+Update: Thứ sáu, 7/8/2020, 11:31 (GMT+7)
+Link_page: https://vnexpress.net/ha-noi-them-benh-nhan-covid-19-4142762.html
+Description: Bệnh nhân nữ 30 tuổi ở huyện Phúc Thọ test nhanh âm tính, xét nghiệm PCR sau đó lại dương tính, Chủ tịch TP Hà Nội Nguyễn Đức Chung thông báo.
+content: 
+Sáng 7/8, phát biểu tại cuộc họp trực tuyến của Thường trực Chính phủ về Covid-19, ông Chung cho hay bệnh nhân ở thôn 1, xã Vân Phúc, huyện Phúc Thọ, cùng bảy người trong gia đình đi du lịch Đà Nẵng từ ngày 24 đến 27/7. Bệnh nhân nghỉ tại số nhà 17 Dương Đình Nghệ, đi tắm biển, đi chùa Linh Ứng tại quận Sơn Trà.
+Theo ông Trịnh Thế Hưng, Giám đốc Trung tâm Y tế huyện Phúc Thọ, từ Đà Nẵng về ngày 27/7, nữ bệnh nhân đã cách ly tại nhà. Ngày 1/8, chị được test nhanh, cho kết quả âm tính.
+Ngày 6/8, chị bị sốt nên cơ quan y tế tiếp tục lấy mẫu dịch hầu họng gửi Trung tâm kiểm soát bệnh tật Hà Nội (CDC Hà Nội). Sớm 7/8, kết quả xét nghiệm bằng phương pháp PCR-RT cho thấy chị này dương tính với nCoV. Bệnh nhân được điều trị tại Bệnh viện Bệnh Nhiệt đới trung ương.
+Ông Hưng cho biết, huyện Phúc Thọ có trên 850 người từ Đà Nẵng về từ 8/7 đến nay. Tất cả đã được test nhanh và đều cho kết quả âm tính, nhưng huyện vẫn khuyến cáo tự cách ly tại nhà 14 ngày. Khu vực bệnh nhân ở được lập chốt giám sát, phun thuốc khử trùng. Việc truy vết, lập danh sách trường hợp tiếp xúc đang được tiến hành.
+Như vậy từ ngày 25/7 đến nay, Hà Nội đã có 4 bệnh nhân Covid-19 đều từ Đà Nẵng về. Liên quan đến 4 ca này, cơ quan chức năng đã xác định hơn 300 người diện F1 (tiếp xúc gần với bệnh nhân Covid-19), trên 400 F2 (tiếp xúc với F2). Tất cả F1 đã được cách ly tập trung, F2 cách ly tại nhà.
+Trước đó "bệnh nhân 714" ở phường Phúc Diễn, quận Bắc Từ Liêm ban đầu test nhanh âm tính, nhưng khi xét nghiệm PCR lại dương tính. Chủ tịch UBND TP Nguyễn Đức Chung đánh giá việc test nhanh chỉ có tác dụng sàng lọc với tỷ lệ chính xác 60-75%. Vì thế, thành phố sẽ xét nghiệm PCR cho toàn bộ 96.000 người từ Đà Nẵng về từ hôm nay.
+Tất Định - Võ Hải
+Image_link: https://i1-vnexpress.vnecdn.net/2020/08/07/116851702-365883221065669-7424-1945-5204-1596787448.jpg?w=680&h=0&q=100&dpr=1&fit=crop&s=MXHqxGFIhp6tB9KBnelwHA
+Image_description: Thôn 1, xã Vân Phúc được cách ly. Ảnh: Thế Quỳnh
