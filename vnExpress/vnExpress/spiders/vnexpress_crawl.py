@@ -1,6 +1,7 @@
 import scrapy
-
-
+from datetime import datetime
+import json
+OUTPUT_FILENAME = 'D:/PycharmProjects/VnExpress/tutorial/vnExpress/vnExpress/spiders/Output/vnexpress/vnexpress{}.txt'.format(datetime.now().strftime('%Y%m%d_%H%M%S'))
 class VnexpressCrawlSpider(scrapy.Spider):
     name = 'vnexpress_crawl'
     allowed_domains = ['vnexpress.net']
@@ -22,7 +23,7 @@ class VnexpressCrawlSpider(scrapy.Spider):
         'https://vnexpress.net/tam-su',
         'https://vnexpress.net/hai'
     ]
-
+    CRAWLED_COUNT = 0
     def parse(self, response):
         links_article = response.css('h3.title-news a::attr(href)').getall()
         for link_article in links_article:
@@ -33,42 +34,45 @@ class VnexpressCrawlSpider(scrapy.Spider):
             yield scrapy.Request(next_page, callback=self.parse)
 
     def get(self, response):
-        title = response.css('h1.title-detail::text').get()
-        title = title.strip('? ')
-        f = open('D:/PycharmProjects/VnExpress/tutorial/vnExpress/vnExpress/spiders/Output/' + title + '.txt', 'w+',
-                 encoding='utf-8')
-        f.write('Title : ' + title + '\n')
+        if response.status == 200 and response.css('meta[name="tt_page_type"]::attr("content")').get() == 'article':
+            print('Crawling from:', response.url)
+            data = {
+                'title' : response.css('h1.title-detail::text').get(),
+                'category' : response.css('ul.breadcrumb li a::text').get(),
+                'update' : response.css('span.date::text').get(),
 
-        category = response.css('ul.breadcrumb li a::text').get()
-        f.write('Category: ' + category + '\n')
+                'link_article' : response.url,
 
-        update = response.css('span.date::text').get()
-        f.write('Update: ' + update + '\n')
+                'description' : response.css('p.description::text').get(),
+                'content': '\n'.join([
+                    ''.join(c.css('*::text').getall())
+                    for c in response.css('article.fck_detail p.Normal')
+                ]),
 
-        link_article = response.url
-        f.write('Link_page: ' + link_article + '\n')
+                'image_link' : response.css('div.fig-picture img::attr(data-src)').get(),
 
-        description = response.css('p.description::text').get()
-        f.write('Description: ' + description + '\n'+ 'Content: ' + '\n')
+                'image_description' : response.css('div.fig-picture img::attr(alt)').get(),
 
-        for i in response.css('article.fck_detail p.Normal'):
-            content = ''.join(i.css('*::text').getall())
-            f.write(content + '\n')
+                'author' : response.css('p.author_mail strong::text').get(),
 
-        image_link = response.css('div.fig-picture img::attr(data-src)').get()
-        f.write('Image_link: ' + image_link + '\n')
+                'keywords': [
+                    k.strip() for k in response.css('meta[name="keywords"]::attr("content")').get().split(',')
+                ],
+                'tags': [
+                    k.strip() for k in response.css('meta[name="its_tag"]::attr("content")').get().split(',')
+                ],
 
-        image_description = response.css('div.fig-picture img::attr(alt)').get()
-        f.write('Image_description: ' + image_description + '\n')
+        }
+            with open(OUTPUT_FILENAME, 'a', encoding='utf8') as f:
+                f.write(json.dumps(data, ensure_ascii=False))
+                f.write('\n')
+                self.CRAWLED_COUNT += 1
+                self.crawler.stats.set_value('CRAWLED_COUNT', self.CRAWLED_COUNT)
+                print('SUCCESS:', response.url)
 
-        author = response.css('p.author_mail strong::text').get()
-        f.write('Author: ' + author + '\n')
 
-        key_words = response.css('meta[name="keywords"]::attr("content")').get()
-        f.write('Keywords: ' + key_words + '\n')
 
-        tags = response.css('meta[name="its_tag"]::attr("content")').get()
-        f.write('Tags: ' + tags)
+
 
 
 
