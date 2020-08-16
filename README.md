@@ -11,26 +11,30 @@ Trong một danh mục sẽ chia ra nhiều page vì link bài báo có số lư
 	+ yield scrapy.Request(next_page, callback=self.parse) với link page tiếp theo ta lại tạo một request tới link page tiếp theo này , và gọi lại chính hàm parse để thực hiện tương tự như link danh mục đầu tiên
 - Hàm get:
 	+ response lúc này chính là nội dung được trả về khi truy cập link ở hàm parse mà response.css('h3.title-news a::attr(href)').getall() trả về cũng chính là link dẫn đến bài báo 
-	+ title = response.css('h1.title-detail::text').get() trả về title bài báo 
-	+ category = response.css('ul.breadcrumb li a::text').get() trả về danh mục chứa bài báo 
-	+ update = response.css('span.date::text').get()trả về ngày update bài báo 
-	+ link_page = response.url trả về link bài báo
-	+ description = response.css('p.description::text').get() trả về mô tả của bài báo 
+	+ 'title' : response.css('h1.title-detail::text').get() trả về title bài báo 
+	+ 'category' : response.css('ul.breadcrumb li a::text').get() trả về danh mục chứa bài báo 
+	+ 'update' : response.css('span.date::text').get()trả về ngày update bài báo 
+	+ 'link_article' : response.url trả về link bài báo
+	+ 'description' : response.css('p.description::text').get() trả về mô tả của bài báo 
 
-	+ for i in response.css('article.fck_detail p.Normal'):
-    		content = ''.join(i.css('*::text').getall())
+	+ 'content': '\n'.join([
+                    ''.join(c.css('*::text').getall())
+                    for c in response.css('article.fck_detail p.Normal')
+                ])
 	trả về đầy đủ nội dung của bài viết
+	+ 'image_link' : response.css('div.fig-picture img::attr(data-src)').get() trả về link ảnh trong bài viết
 
-	+ image_link = response.css('div.fig-picture img::attr(data-src)').get() trả về link ảnh trong bài viết
+	+ 'image_description' : response.css('div.fig-picture img::attr(alt)').get() trả về mô tả của link ảnh trong bài báo 
 
-	+ image_description = response.css('div.fig-picture img::attr(alt)').get() trả về mô tả của link ảnh trong bài báo 
-
-	+ author = response.css('p.author_mail strong::text').get()
+	+ 'author' : response.css('p.author_mail strong::text').get()
 	trả về tác giả của bài báo 
-
-	+ key_words = response.css('meta[name="keywords"]::attr("content")').get() trả về những keyword của bài báo
-
-	+ tags = response.css('meta[name="its_tag"]::attr("content")').get()trả về các tag của bài báo 
+	+'keywords': [
+                    k.strip() for k in response.css('meta[name="keywords"]::attr("content")').get().split(',')
+                ], trả về những keyword của bài báo
+        + 'tags': [
+                 k.strip() for k in response.css('meta[name="its_tag"]::attr("content")').get().split(',')
+              ], trả về các tag của bài báo 
+	
 	
 
 
