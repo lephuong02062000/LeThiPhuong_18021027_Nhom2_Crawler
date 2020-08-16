@@ -1,6 +1,6 @@
 import scrapy
 
-
+OUTPUT_FILENAME = 'D:/PycharmProjects/VnExpress/tutorial/vnExpress/vnExpress/spiders/Output/sosanhgia/sosanhgia{}.txt'.format(datetime.now().strftime('%Y%m%d_%H%M%S'))
 class VnexpressCrawlSpider(scrapy.Spider):
     name = 'vnexpress_crawl'
     allowed_domains = ['vnexpress.net']
@@ -33,42 +33,36 @@ class VnexpressCrawlSpider(scrapy.Spider):
             yield scrapy.Request(next_page, callback=self.parse)
 
     def get(self, response):
-        title = response.css('h1.title-detail::text').get()
-        title = title.strip('? ')
-        f = open('D:/PycharmProjects/VnExpress/tutorial/vnExpress/vnExpress/spiders/Output/' + title + '.txt', 'w+',
-                 encoding='utf-8')
-        f.write('Title : ' + title + '\n')
+        if response.status == 200 and response.css('meta[name="tt_page_type"]::attr("content")').get() == 'article':
+            print('Crawling from:', response.url)
+            data = {
+                'title' : response.css('h1.title-detail::text').get(),
+                'category' : response.css('ul.breadcrumb li a::text').get(),
+                'update' : response.css('span.date::text').get(),
 
-        category = response.css('ul.breadcrumb li a::text').get()
-        f.write('Category: ' + category + '\n')
+                'link_article' : response.url,
 
-        update = response.css('span.date::text').get()
-        f.write('Update: ' + update + '\n')
+                'description' : response.css('p.description::text').get(),
+                'content': '\n'.join([
+                    ''.join(c.css('*::text').getall())
+                    for c in response.css('article.fck_detail p.Normal')
+                ]),
 
-        link_article = response.url
-        f.write('Link_page: ' + link_article + '\n')
+                'image_link' : response.css('div.fig-picture img::attr(data-src)').get(),
 
-        description = response.css('p.description::text').get()
-        f.write('Description: ' + description + '\n'+ 'Content: ' + '\n')
+                'image_description' : response.css('div.fig-picture img::attr(alt)').get(),
 
-        for i in response.css('article.fck_detail p.Normal'):
-            content = ''.join(i.css('*::text').getall())
-            f.write(content + '\n')
+                'author' : response.css('p.author_mail strong::text').get(),
 
-        image_link = response.css('div.fig-picture img::attr(data-src)').get()
-        f.write('Image_link: ' + image_link + '\n')
+                'key_words' : response.css('meta[name="keywords"]::attr("content")').get(),
 
-        image_description = response.css('div.fig-picture img::attr(alt)').get()
-        f.write('Image_description: ' + image_description + '\n')
+                'tags' : response.css('meta[name="its_tag"]::attr("content")').get()
 
-        author = response.css('p.author_mail strong::text').get()
-        f.write('Author: ' + author + '\n')
+        }
 
-        key_words = response.css('meta[name="keywords"]::attr("content")').get()
-        f.write('Keywords: ' + key_words + '\n')
 
-        tags = response.css('meta[name="its_tag"]::attr("content")').get()
-        f.write('Tags: ' + tags)
+
+
 
 
 
