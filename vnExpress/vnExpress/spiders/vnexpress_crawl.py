@@ -1,4 +1,5 @@
 import scrapy
+from datetime import datetime
 
 OUTPUT_FILENAME = 'D:/PycharmProjects/VnExpress/tutorial/vnExpress/vnExpress/spiders/Output/sosanhgia/sosanhgia{}.txt'.format(datetime.now().strftime('%Y%m%d_%H%M%S'))
 class VnexpressCrawlSpider(scrapy.Spider):
